@@ -87,7 +87,7 @@ layout:
 parts:
   git:
     source: https://github.com/git/git.git
-    source-tag: v2.48.1
+    source-tag: v2.49.0
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
