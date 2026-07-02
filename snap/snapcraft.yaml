@@ -124,10 +124,10 @@ parts:
       ./configure --prefix=/usr --with-curl --with-expat
       make -j$(nproc --all)
     override-stage: |
+      craftctl default
       cd $CRAFT_PART_SRC
       mkdir -p $CRAFT_STAGE
       DESTDIR=$CRAFT_STAGE make install install-man
-      craftctl default
     override-prime: |
       craftctl default
       cd $CRAFT_PART_SRC
@@ -137,6 +137,7 @@ parts:
       echo "___git_complete git-scm __git_main" >> $CRAFT_PRIME/usr/share/bash-completion/completions/git
     build-packages:
       - build-essential
+      - autoconf
       - gettext
       - libssl-dev
       - libexpat1-dev
