@@ -11,7 +11,13 @@ description: |
 
   In order to enable this Snap as your preferred Git tool, run: `sudo snap alias git-scm git`
 
-  If you want to harden a Git server accessed via SSH through this Snap, make sure to alias the necessary Git tool on the server: `sudo snap alias git-scm.git-upload-pack git-upload-pack`
+  If you want to harden a Git server accessed via SSH through this Snap, make sure to alias the necessary Git tool on the server:
+
+  ```
+  sudo snap alias git-scm.git-upload-pack git-upload-pack
+  sudo snap alias git-scm.git-receive-pack git-receive-pack
+  ```
+
 confinement: strict
 base: core24
 compression: lzo
@@ -74,16 +80,26 @@ apps:
       - home
       - dot-local-src
       - removable-media
+  git-receive-pack:
+    environment:
+      PATH: $SNAP/usr/bin:$PATH
+    command: usr/bin/git-receive-pack
+    plugs:
+      - home
+      - dot-local-src
+      - removable-media
 
 lint:
   ignore:
     - classic
     - library
+
 plugs:
   dot-local-src:
     interface: personal-files
     read: [ $HOME/.local/src ]
     write: [ $HOME/.local/src ]
+
 layout:
   /etc/gitconfig:
     bind-file: $SNAP_DATA/etc/gitconfig
