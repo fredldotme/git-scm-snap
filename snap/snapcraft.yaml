@@ -140,12 +140,10 @@ parts:
       make -j$(nproc --all)
     override-stage: |
       craftctl default
-      cd $CRAFT_PART_SRC
-      mkdir -p $CRAFT_STAGE
-      DESTDIR=$CRAFT_STAGE make install install-man
     override-prime: |
       craftctl default
       cd $CRAFT_PART_SRC
+      DESTDIR=$CRAFT_PRIME make install install-man
       mkdir -p $CRAFT_PRIME/usr/share/bash-completion/completions/
       cp -a $CRAFT_PART_SRC/contrib/completion/git-completion.bash $CRAFT_PRIME/usr/share/bash-completion/completions/git
       echo "" >> $CRAFT_PRIME/usr/share/bash-completion/completions/git
