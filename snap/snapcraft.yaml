@@ -63,7 +63,6 @@ apps:
       - removable-media
       - network
       - ssh-keys
-      - ssh-public-keys
       - gpg-keys
       - gpg-public-keys
     completer: usr/share/bash-completion/completions/git
