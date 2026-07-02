@@ -11,12 +11,11 @@ description: |
 
   In order to enable this Snap as your preferred Git tool, run: `sudo snap alias git-scm git`
 
-  If you want to harden a Git server accessed via SSH through this Snap, make sure to alias the necessary Git tool on the server:
+  If you want to harden a Git server accessed via SSH through this Snap, make sure to alias the necessary Git tools on the server:
 
-  ```
-  sudo snap alias git-scm.git-upload-pack git-upload-pack
-  sudo snap alias git-scm.git-receive-pack git-receive-pack
-  ```
+  `sudo snap alias git-scm.git-upload-pack git-upload-pack`
+
+  `sudo snap alias git-scm.git-receive-pack git-receive-pack`
 
 confinement: strict
 base: core24
