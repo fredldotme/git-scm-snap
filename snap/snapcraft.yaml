@@ -4,12 +4,14 @@ license: GPL-2.0-only
 summary: Git SCM
 description: |
   Git is a fast, scalable, distributed revision control system with an unusually rich command set that provides both high-level operations and full access to internals.
-  
+
   Git is an Open Source project covered by the GNU General Public License version 2 (some parts of it are under different licenses, compatible with the GPLv2). It was originally written by Linus Torvalds with help of a group of hackers around the net.
-  
+
   More on usage at: https://git-scm.com/docs
-  
-  In order to enable this Snap as your preferred git tool, run: `sudo snap alias git-scm git`
+
+  In order to enable this Snap as your preferred Git tool, run: `sudo snap alias git-scm git`
+
+  If you want to harden a Git server hosted via SSH through this Snap, make sure to alias the necessary helper command: `sudo snap alias git-scm.git-upload-pack git-upload-pack`
 confinement: strict
 base: core24
 compression: lzo
@@ -52,10 +54,28 @@ apps:
       GROFF_FONT_PATH: $SNAP/usr/share/groff/current/font
       GROFF_TMAC_PATH: $SNAP/usr/share/groff/current/tmac
       GIT_SSH_COMMAND: ssh -o UserKnownHostsFile=$SNAP_USER_COMMON/known_hosts
+      PATH: $SNAP/usr/bin:$PATH
     command-chain: [ usr/bin/envsetup ]
     command: usr/bin/git
-    plugs: [ home, dot-local-src, removable-media, network, ssh-keys, ssh-public-keys, gpg-keys, gpg-public-keys ]
+    plugs:
+      - home
+      - dot-local-src
+      - removable-media
+      - network
+      - ssh-keys
+      - ssh-public-keys
+      - gpg-keys
+      - gpg-public-keys
     completer: usr/share/bash-completion/completions/git
+  git-upload-pack:
+    environment:
+      PATH: $SNAP/usr/bin:$PATH
+    command-chain: [ usr/bin/envsetup ]
+    command: usr/bin/git-upload-pack
+    plugs:
+      - home
+      - dot-local-src
+      - removable-media
 
 lint:
   ignore:
@@ -89,17 +109,27 @@ layout:
 parts:
   git:
     source: https://github.com/git/git.git
-    source-tag: v2.53.0
+    source-tag: v2.55.0
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/usr
       - --with-curl
       - --with-expat
+    override-pull: |
+      craftctl default
+      curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > install-rust.sh
+      bash ./install-rust.sh -y
+      export PATH="$HOME/.cargo/bin:$PATH"
+      rustup default nightly
     override-build: |
       cd $CRAFT_PART_SRC
       craftctl set version="$(git describe --abbrev=0 --tags)"
-      craftctl default
+      export PATH="$HOME/.cargo/bin:$PATH"
+      autoreconf --install
+      ./configure --prefix=/usr --with-curl --with-expat
+      make -j$(nproc --all)
+      cp -a $CRAFT_PART_SRC/* $CRAFT_PART_BUILD/
     override-prime: |
       craftctl default
       cd $CRAFT_PART_BUILD
