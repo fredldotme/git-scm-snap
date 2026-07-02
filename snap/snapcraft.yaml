@@ -159,6 +159,7 @@ parts:
       - zlib1g-dev
       - asciidoc
       - xmlto
+      - curl
     stage-packages:
       - gettext
       - libcurl4-openssl-dev
