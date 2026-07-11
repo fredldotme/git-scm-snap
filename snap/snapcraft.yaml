@@ -144,12 +144,11 @@ parts:
       autoreconf --install
       ./configure --prefix=/usr --with-curl --with-expat
       make -j$(nproc --all)
+      DESTDIR=$CRAFT_PART_INSTALL make install install-man
     override-stage: |
       craftctl default
     override-prime: |
       craftctl default
-      cd $CRAFT_PART_SRC
-      DESTDIR=$CRAFT_PRIME make install install-man
       mkdir -p $CRAFT_PRIME/usr/share/bash-completion/completions/
       cp -a $CRAFT_PART_SRC/contrib/completion/git-completion.bash $CRAFT_PRIME/usr/share/bash-completion/completions/git
       echo "" >> $CRAFT_PRIME/usr/share/bash-completion/completions/git
