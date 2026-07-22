@@ -3,15 +3,20 @@ adopt-info: git
 license: GPL-2.0-only
 summary: Git SCM
 description: |
-  Git is a fast, scalable, distributed revision control system with an unusually rich command set that provides both high-level operations and full access to internals.
+  Git is a fast, scalable, distributed revision control system
+  with an unusually rich command set that provides both high-level
+  operations and full access to internals.
 
-  Git is an Open Source project covered by the GNU General Public License version 2 (some parts of it are under different licenses, compatible with the GPLv2). It was originally written by Linus Torvalds with help of a group of hackers around the net.
+  Git is an Open Source project covered by the GNU General Public License version 2
+  (some parts of it are under different licenses, compatible with the GPLv2).
+  It was originally written by Linus Torvalds with help of a group of hackers around the net.
 
   More on usage at: https://git-scm.com/docs
 
   In order to enable this Snap as your preferred Git tool, run: `sudo snap alias git-scm git`
 
-  If you want to harden a Git server accessed via SSH through this Snap, make sure to alias the necessary Git tools on the server:
+  If you want to harden a Git server accessed via SSH through this Snap, make sure to alias the
+  necessary Git tools on the remote or ask your admin to change it:
 
   `sudo snap alias git-scm.git-upload-pack git-upload-pack`
 
