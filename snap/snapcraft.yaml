@@ -133,7 +133,7 @@ layout:
 parts:
   git:
     source: https://github.com/git/git.git
-    source-tag: v2.55.0
+    source-tag: v2.56.1
     source-depth: 1
     plugin: nil
     override-pull: |
