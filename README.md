@@ -10,6 +10,7 @@ To install this package, run:
 
 ```
 sudo snap install git-scm
+sudo snap alias git-scm git
 ```
 
 ## General info
@@ -20,7 +21,8 @@ default build configuration for Git.
 It features:
 
 - `git-scm` command: The regular Git command. If you prefer to shorten it as with other
-  regular incarnations of Git, alias it using: `sudo snap alias git-scm git`
+  regular incarnations of Git, make sure you run the alias command from the installation
+  section.
 - Nano (default) and VIM for when Git requests text input using an editor.
 - OpenSSH for proper transfer of objects using SSH
 - `git-upload-pack` & `git-receive-pack` commands for use on a Git server. More below.
