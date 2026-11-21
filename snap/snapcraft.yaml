@@ -22,6 +22,8 @@ description: |
 
   `sudo snap alias git-scm.git-receive-pack git-receive-pack`
 
+  Make sure `/snap/bin` is in your system's global `PATH` (default on Ubuntu Server).
+
 confinement: strict
 base: core24
 compression: lzo
