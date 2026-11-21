@@ -4,4 +4,16 @@ if [ -z "$EDITOR" ]; then
     export EDITOR=nano
 fi
 
+if [ ! -d "$SNAP_USER_DATA/.gnupg" ]; then
+    mkdir -p "$SNAP_USER_DATA/.gnupg"
+fi
+
+function setup_symlink {
+    [ ! -L "$2" ] && ln -sf "$1" "$2"
+}
+
+setup_symlink "$SNAP_REAL_HOME/.gnupg/trustdb.gpg" "$SNAP_USER_DATA/.gnupg/trustdb.gpg"
+setup_symlink "$SNAP_REAL_HOME/.gnupg/pubring.kbx" "$SNAP_USER_DATA/.gnupg/pubring.kbx"
+setup_symlink "$SNAP_REAL_HOME/.gnupg/pubring.kbx~" "$SNAP_USER_DATA/.gnupg/pubring.kbx~"
+
 exec "$@"

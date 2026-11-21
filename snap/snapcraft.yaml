@@ -27,6 +27,7 @@ description: |
 confinement: strict
 base: core24
 compression: lzo
+assumes: [snap-uid-envvars]
 
 platforms:
   arm64:
