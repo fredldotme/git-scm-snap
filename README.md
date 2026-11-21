@@ -26,6 +26,7 @@ It features:
 - Nano (default) and VIM for when Git requests text input using an editor. The selected
   editor can be change via exporting the `EDITOR=vim` environment variable.
 - OpenSSH for proper transfer of objects using SSH
+- GnuPG for signing commits, integrated with the host's gpg-agent
 - `git-upload-pack` & `git-receive-pack` commands for use on a Git server. More below.
 
 ## Hardening of your Git server
