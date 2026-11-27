@@ -29,6 +29,13 @@ It features:
 - GnuPG for signing commits, integrated with the host's gpg-agent
 - `git-upload-pack` & `git-receive-pack` commands for use on a Git server. More below.
 
+Additional optional permissions:
+
+- `dot-local-src` for allowing access to `$HOME/.local/src`, an analogue to a typical
+  GNU/Linux system's `/usr/local/src`
+- `dot-repoconfig` for use in conjunction with Google's `repo` tool, allowing access
+  to `$HOME/.repoconfig`
+
 ## Hardening of your Git server
 
 Using this Snap package it is possible to harden servers that host Git repositories,
@@ -51,7 +58,7 @@ strict confinement rules, which are limited to:
 
 - visible files in the remote user's home directory
 - removable media accessible by that remote user
-- a special directory `$HOME/.local/src` as an analogue to `/usr/local/src`.
+- `$HOME/.local/src`, again as an analogue to `/usr/local/src`
 
 To ensure proper security, make sure you don't store secrets in those paths.
 
