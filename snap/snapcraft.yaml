@@ -79,6 +79,7 @@ apps:
     plugs:
       - home
       - dot-local-src
+      - dot-repoconfig
       - removable-media
       - network
       - ssh-keys
@@ -112,6 +113,10 @@ plugs:
     interface: personal-files
     read: [ $HOME/.local/src ]
     write: [ $HOME/.local/src ]
+  dot-repoconfig:
+    interface: personal-files
+    read: [ $HOME/.repoconfig ]
+    write: [ $HOME/.repoconfig ]
 
 layout:
   /etc/gitconfig:
